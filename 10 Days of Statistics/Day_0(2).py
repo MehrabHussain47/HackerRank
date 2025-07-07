@@ -16,9 +16,7 @@ import sys
 
 def weightedMean(X, W):
     # Write your code here
-    weighted_sum = 0
-    for i in range(len(vals)):
-        weighted_sum += vals[i] * weights[i]
+    weighted_sum = sum(x * w for x, w in zip(vals, weights))
     total_weight = sum(weights)
 
     weighted_mean = weighted_sum / total_weight
