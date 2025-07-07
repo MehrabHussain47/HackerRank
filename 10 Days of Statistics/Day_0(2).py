@@ -14,9 +14,11 @@ import sys
 #  2. INTEGER_ARRAY W
 #
 
-def weightedMean(X, W):
+def weightedMean(V, W):
     # Write your code here
-    weighted_sum = sum(x * w for x, w in zip(vals, weights))
+    weighted_sum = 0
+    for i in range(len(vals)):
+        weighted_sum += vals[i] * weights[i]
     total_weight = sum(weights)
 
     weighted_mean = weighted_sum / total_weight
