@@ -42,15 +42,8 @@ def quartiles(arr):
     return [q1, q2, q3]
 
 if __name__ == '__main__':
-    fptr = open(os.environ['OUTPUT_PATH'], 'w')
-
     n = int(input().strip())
-
     data = list(map(int, input().rstrip().split()))
-
     res = quartiles(data)
-
-    fptr.write('\n'.join(map(str, res)))
-    fptr.write('\n')
-
-    fptr.close()
+    for value in res:
+        print(value)
