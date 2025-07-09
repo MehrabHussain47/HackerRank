@@ -6,6 +6,7 @@ import random
 import re
 import sys
 
+# Print your answer to 1 decimal place within this function
 #
 # Complete the 'interQuartile' function below.
 #
@@ -15,40 +16,47 @@ import sys
 #
 
 def interQuartile(values, freqs):
-    # Print your answer to 1 decimal place within this function
-    S = []
+    s = []
     for i in range(len(values)):
-        S.extend([values[i]] * freqs[i])
+        s.extend([values[i]] * freqs[i])
     
-    S.sort()
-
-    def median(arr):
-        n = len(arr)
-        mid = n // 2
-        if n % 2 == 0:
-            return (arr[mid - 1] + arr[mid]) / 2
+    s.sort()
+    
+    n = len(s)
+    
+    def find_median(arr):
+        length = len(arr)
+        if length % 2 == 0:
+            mid1_idx = length // 2 - 1
+            mid2_idx = length // 2
+            median = (arr[mid1_idx] + arr[mid2_idx]) / 2
         else:
-            return arr[mid]
+            median = float(arr[length // 2])
+        return median
 
-    n = len(S)
+    mid_index = n // 2
+
     if n % 2 == 0:
-        lower_half = S[:n // 2]
-        upper_half = S[n // 2:]
+        lower_half = s[:mid_index]
+        upper_half = s[mid_index:]
     else:
-        lower_half = S[:n // 2]
-        upper_half = S[n // 2 + 1:]
+        lower_half = s[:mid_index]
+        upper_half = s[mid_index + 1:]
+        
+    q1 = find_median(lower_half)
+    q3 = find_median(upper_half)
 
-    Q1 = median(lower_half)
-    Q3 = median(upper_half)
-
-    IQR = round(Q3 - Q1, 1)
-    print(IQR)
+    interquartile_range = q3 - q1
+    print(f"{interquartile_range:.1f}")
 
 if __name__ == '__main__':
-    n = int(input().strip())
+    try:
+        n = int(input().strip())
+        val = list(map(int, input().rstrip().split()))
+        freq = list(map(int, input().rstrip().split()))
+        
+        interQuartile(val, freq)
+    except (EOFError, RuntimeError):
+        print("Running with example data as input is not available.")
+        print("Example: values = [6, 12, 8, 10, 20, 16], freqs = [5, 4, 3, 2, 1, 5]")
 
-    val = list(map(int, input().rstrip().split()))
-
-    freq = list(map(int, input().rstrip().split()))
-
-    interQuartile(val, freq)
