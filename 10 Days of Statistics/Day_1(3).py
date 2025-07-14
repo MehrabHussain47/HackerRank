@@ -17,7 +17,7 @@ def stdDev(arr):
     n = len(vals)
     if n == 0:
         raise ValueError("values must contain at least one element")
-
+    
     mean = sum(vals) / n
     squared_diffs = [(x - mean) ** 2 for x in vals]
     return math.sqrt(sum(squared_diffs) / n)
